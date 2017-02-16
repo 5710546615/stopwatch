@@ -1,7 +1,8 @@
 package stopwatch;
 
 /**
- * A Stopwatch that measures elapsed time between a starting time and stopping time, or until the present time.
+ * A Stopwatch that measures elapsed time between a starting time and stopping
+ * time, or until the present time.
  * 
  * @author Visurt Anuttivong
  * @version 27/01/2560
@@ -10,9 +11,9 @@ public class Stopwatch {
 	/** constant for converting nanoseconds to seconds. */
 	private static final double NANOSECONDS = 1.0E-9;
 	/** time that the stopwatch was started, in nanoseconds. */
-	private double startTime;
+	private long startTime;
 	/** time that the stopwatch was ended, in nanoseconds. */
-	private double endTime;
+	private long endTime;
 	/** Checking that the stopwatch is still running or not */
 	private boolean isRunning;
 
@@ -30,9 +31,9 @@ public class Stopwatch {
 	 */
 	public double getElapsed() {
 		if (this.isRunning()) {
-			return System.nanoTime() * NANOSECONDS - this.startTime;
+			return NANOSECONDS * (System.nanoTime() - this.startTime);
 		} else {
-			return this.endTime - this.startTime;
+			return NANOSECONDS * (this.endTime - this.startTime);
 		}
 	}
 
@@ -48,7 +49,7 @@ public class Stopwatch {
 	/** Start the stopwatch if it is not already running. */
 	public void start() {
 		if (!this.isRunning()) {
-			this.startTime = System.nanoTime() * NANOSECONDS;
+			this.startTime = System.nanoTime();
 			isRunning = true;
 		}
 	}
@@ -56,7 +57,7 @@ public class Stopwatch {
 	/** Stop the stopwatch if it is running. */
 	public void stop() {
 		if (this.isRunning()) {
-			this.endTime = System.nanoTime() * NANOSECONDS;
+			this.endTime = System.nanoTime();
 			isRunning = false;
 		}
 	}
